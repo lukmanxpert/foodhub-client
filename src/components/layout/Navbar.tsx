@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./MoodToggle";
+import { authClient } from "@/lib/auth-client";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface MenuItem {
   title: string;
@@ -59,7 +61,7 @@ const Navbar = ({
     title: "FoodHub",
   },
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "/home" },
     {
       title: "Products",
       url: "#",
@@ -83,6 +85,7 @@ const Navbar = ({
   },
   className,
 }: Navbar1Props) => {
+  const { data: session } = authClient.useSession();
   return (
     <section className={cn("py-4", className)}>
       <div className="">
@@ -105,12 +108,23 @@ const Navbar = ({
           </div>
           <div className="flex items-center gap-2">
             <ModeToggle />
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+            {session?.user ? (
+              <>
+                <Avatar>
+                  <AvatarImage src={session?.user?.image as string} />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </>
+            ) : (
+              <>
+                <Button asChild variant="outline" size="sm">
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
+                </Button>
+                <Button asChild size="sm">
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                </Button>
+              </>
+            )}
           </div>
         </nav>
 
