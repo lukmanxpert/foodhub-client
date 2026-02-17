@@ -1,9 +1,12 @@
 import { Navbar } from "@/components/layout/Navbar";
+import { authClient } from "@/lib/auth-client";
 
-export default function Home() {
+export default async function Home() {
+  const user = await authClient.getSession()
+  console.log('user :>> ', user);
   return (
     <div>
-      <Navbar />
+      Home Page!
     </div>
   );
 }
