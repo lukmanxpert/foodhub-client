@@ -20,6 +20,8 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
+import { env } from "@/env";
 
 const formSchema = z.object({
   email: z.email(),
@@ -45,10 +47,12 @@ export function LoginForm({
           email: value.email,
           password: value.password,
           rememberMe: true,
-          callbackURL: "http://localhost:3000",
+          callbackURL: env.NEXT_PUBLIC_APP_URL,
         });
         if (error) {
           return toast.error(error.message, { id: toastId });
+        } else {
+          return toast.success("Log In success.", { id: toastId });
         }
       } catch (error) {
         return toast.error("Something went wrong, please try again.", {
@@ -131,7 +135,8 @@ export function LoginForm({
                   Login with Google
                 </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a href="#">Sign up</a>
+                  Don&apos;t have an account?{" "}
+                  <Link href={"/signup"}>Sign Up</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
