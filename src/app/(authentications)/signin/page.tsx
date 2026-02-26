@@ -1,11 +1,10 @@
 import { LoginForm } from "@/components/modules/authentications/login/login-form";
-import React from "react";
 
 export default function SignIn() {
   return (
-    <div>
+    <div className="min-h-screen min-w-full flex flex-col items-center justify-center gap-5">
       <h1 className="text-3xl text-center font-bold">SignIn</h1>
-      <div className="max-w-2xl mx-auto my-4">
+      <div className="w-full max-w-2xl">
         <LoginForm />
       </div>
     </div>

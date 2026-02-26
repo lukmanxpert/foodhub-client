@@ -14,7 +14,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
+  SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -23,6 +26,10 @@ import Link from "next/link";
 import { ModeToggle } from "./MoodToggle";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { ProfileDialogContent } from "../modules/authentications/ProfileDialogContent";
 
 interface MenuItem {
   title: string;
@@ -110,10 +117,15 @@ const Navbar = ({
             <ModeToggle />
             {session?.user ? (
               <>
-                <Avatar>
-                  <AvatarImage src={session?.user?.image as string} />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <Dialog>
+                  <DialogTrigger>
+                    <Avatar>
+                      <AvatarImage src={session?.user?.image as string} />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DialogTrigger>
+                  <ProfileDialogContent />
+                </Dialog>
               </>
             ) : (
               <>
