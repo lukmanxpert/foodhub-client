@@ -14,17 +14,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function ProfileDialogContent() {
   const router = useRouter();
   const handleSignOut = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/signin"); // redirect to login page
+    const toastId = toast.loading("Logging out...");
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/signin"); // redirect to login page
+          },
         },
-      },
-    });
+      });
+      toast.success("Logout success.", { id: toastId });
+    } catch (error: any) {
+      toast.success(error.message || "Something went wrong, try again.", {
+        id: toastId,
+      });
+    }
   };
   return (
     <DialogContent className="sm:max-w-sm">

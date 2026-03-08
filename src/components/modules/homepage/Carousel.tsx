@@ -20,7 +20,7 @@ const slides = [
     desc: "Enjoy nutritious meals crafted with fresh ingredients.",
   },
   {
-    img: "/waiter.jpg",
+    img: "/burger.jpg",
     title: "Fastest Food Delivery",
     desc: "Get your food delivered hot and fresh at your doorstep.",
   },
@@ -47,7 +47,7 @@ export function Carousel() {
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className="embla__slide relative h-[65vh] md:h-[80vh] w-full"
+                className="embla__slide relative h-[65vh] md:h-[91vh] w-full"
               >
                 {/* Background Image */}
                 <Image

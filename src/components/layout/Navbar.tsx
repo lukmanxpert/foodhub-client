@@ -26,8 +26,6 @@ import Link from "next/link";
 import { ModeToggle } from "./MoodToggle";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { ProfileDialogContent } from "../modules/authentications/ProfileDialogContent";
 
@@ -93,8 +91,9 @@ const Navbar = ({
   className,
 }: Navbar1Props) => {
   const { data: session } = authClient.useSession();
+  console.log('session :>> ', session);
   return (
-    <section className={cn("py-4", className)}>
+    <section className={cn("p-2", className)}>
       <div className="">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
